@@ -1,0 +1,135 @@
+{
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for managing OAuth2 servers configuration in your Azure API Management deployment. OAuth 2.0 can be used to authorize developer accounts for Azure API Management. For more information refer to [How to OAuth2](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-oauth2).",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/apimanagement-apimauthorizationservers/2016-10-10/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow.",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "AuthorizationServers_ListByService": {
+            "main": "./lib/actions/AuthorizationServers_ListByService.js",
+            "title": "Lists a collection of authorization servers defined within a service instance.",
+            "description": "Lists a collection of authorization servers defined within a service instance.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AuthorizationServers_ListByService.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AuthorizationServers_Delete": {
+            "main": "./lib/actions/AuthorizationServers_Delete.js",
+            "title": "Deletes specific authorization server instance.",
+            "description": "Deletes specific authorization server instance.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AuthorizationServers_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AuthorizationServers_Get": {
+            "main": "./lib/actions/AuthorizationServers_Get.js",
+            "title": "Gets the details of the authorization server specified by its identifier.",
+            "description": "Gets the details of the authorization server specified by its identifier.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AuthorizationServers_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AuthorizationServers_Update": {
+            "main": "./lib/actions/AuthorizationServers_Update.js",
+            "title": "Updates the details of the authorization server specified by its identifier.",
+            "description": "Updates the details of the authorization server specified by its identifier.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AuthorizationServers_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AuthorizationServers_CreateOrUpdate": {
+            "main": "./lib/actions/AuthorizationServers_CreateOrUpdate.js",
+            "title": "Creates new authorization server or updates an existing authorization server.",
+            "description": "Creates new authorization server or updates an existing authorization server.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AuthorizationServers_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

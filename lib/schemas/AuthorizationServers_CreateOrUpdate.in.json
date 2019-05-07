@@ -1,0 +1,199 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "serviceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        },
+        "authsid": {
+            "required": true,
+            "type": "string",
+            "maxLength": 256,
+            "pattern": "^[^*#&+:<>?]+$"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "External OAuth authorization server settings.",
+            "properties": {
+                "authorizationEndpoint": {
+                    "description": "OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2.",
+                    "type": "string"
+                },
+                "authorizationMethods": {
+                    "description": "HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional.",
+                    "items": {
+                        "enum": [
+                            "HEAD",
+                            "OPTIONS",
+                            "TRACE",
+                            "GET",
+                            "POST",
+                            "PUT",
+                            "PATCH",
+                            "DELETE"
+                        ],
+                        "type": "string",
+                        "x-ms-enum": {
+                            "modelAsString": false,
+                            "name": "MethodContract"
+                        }
+                    },
+                    "type": "array"
+                },
+                "bearerTokenSendingMethods": {
+                    "description": "Specifies the mechanism by which access token is passed to the API. ",
+                    "externalDocs": {
+                        "url": "http://tools.ietf.org/html/rfc6749#section-4"
+                    },
+                    "items": {
+                        "enum": [
+                            "authorizationHeader",
+                            "query"
+                        ],
+                        "type": "string",
+                        "x-ms-enum": {
+                            "modelAsString": false,
+                            "name": "BearerTokenSendingMethodsContract"
+                        }
+                    },
+                    "type": "array"
+                },
+                "clientAuthenticationMethod": {
+                    "description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format.",
+                    "items": {
+                        "enum": [
+                            "Basic",
+                            "Body"
+                        ],
+                        "type": "string",
+                        "x-ms-enum": {
+                            "modelAsString": false,
+                            "name": "ClientAuthenticationMethodContract"
+                        }
+                    },
+                    "type": "array"
+                },
+                "clientId": {
+                    "description": "Client or app id registered with this authorization server.",
+                    "type": "string"
+                },
+                "clientRegistrationEndpoint": {
+                    "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.",
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "Client or app secret registered with this authorization server.",
+                    "type": "string"
+                },
+                "defaultScope": {
+                    "description": "Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.",
+                    "externalDocs": {
+                        "url": "http://tools.ietf.org/html/rfc6749#section-3.3"
+                    },
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the authorization server. Can contain HTML formatting tags.",
+                    "type": "string"
+                },
+                "grantTypes": {
+                    "description": "Form of an authorization grant, which the client uses to request the access token.",
+                    "externalDocs": {
+                        "url": "http://tools.ietf.org/html/rfc6749#section-4"
+                    },
+                    "items": {
+                        "enum": [
+                            "authorizationCode",
+                            "implicit",
+                            "resourceOwnerPassword",
+                            "clientCredentials"
+                        ],
+                        "type": "string",
+                        "x-ms-enum": {
+                            "modelAsString": false,
+                            "name": "GrantTypesContract"
+                        }
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Uniquely identifies the authorization server within the current API Management service instance. The value is a valid relative URL in the format of /authorizationServers/{authsid} where {authsid} is an authorization server identifier.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "name": {
+                    "description": "User-friendly authorization server name.",
+                    "maxLength": 50,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "resourceOwnerPassword": {
+                    "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.",
+                    "type": "string"
+                },
+                "resourceOwnerUsername": {
+                    "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username.",
+                    "type": "string"
+                },
+                "supportState": {
+                    "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
+                    "externalDocs": {
+                        "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+                    },
+                    "type": "boolean"
+                },
+                "tokenBodyParameters": {
+                    "description": "Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {\"name\" : \"name value\", \"value\": \"a value\"}.",
+                    "items": {
+                        "description": "OAuth acquire token request body parameter (www-url-form-encoded).",
+                        "properties": {
+                            "name": {
+                                "description": "body parameter name.",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "body parameter value.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "tokenEndpoint": {
+                    "description": "OAuth token endpoint. Contains absolute URI to entity being referenced.",
+                    "externalDocs": {
+                        "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
+                    },
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "clientRegistrationEndpoint",
+                "authorizationEndpoint",
+                "clientId",
+                "grantTypes"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
